@@ -1,0 +1,82 @@
+{
+  "_args": [
+    [
+      "angular-cookies",
+      "/home/dmarkey/ionic_apps/smartHomeApp"
+    ]
+  ],
+  "_from": "angular-cookies@*",
+  "_id": "angular-cookies@1.4.6",
+  "_inCache": true,
+  "_location": "/angular-cookies",
+  "_nodeVersion": "0.10.26",
+  "_npmUser": {
+    "email": "angular-core+npm@google.com",
+    "name": "angularcore"
+  },
+  "_npmVersion": "2.0.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "angular-cookies",
+    "raw": "angular-cookies",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-cookies/-/angular-cookies-1.4.6.tgz",
+  "_shasum": "42ace7f66bdd93c2a45139eefd5bb88a9ae21dfe",
+  "_shrinkwrap": null,
+  "_spec": "angular-cookies",
+  "_where": "/home/dmarkey/ionic_apps/smartHomeApp",
+  "author": {
+    "email": "angular-core+npm@google.com",
+    "name": "Angular Core Team"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "dependencies": {},
+  "description": "AngularJS module for cookies",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "42ace7f66bdd93c2a45139eefd5bb88a9ae21dfe",
+    "tarball": "http://registry.npmjs.org/angular-cookies/-/angular-cookies-1.4.6.tgz"
+  },
+  "gitHead": "9965ef6f608ffb90983c1c32cf0127d827f3379d",
+  "homepage": "http://angularjs.org",
+  "installable": true,
+  "keywords": [
+    "angular",
+    "browser",
+    "client-side",
+    "cookies",
+    "framework"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "angularcore",
+      "email": "angular-core+npm@google.com"
+    },
+    {
+      "name": "petebd",
+      "email": "pete@bacondarwin.com"
+    }
+  ],
+  "name": "angular-cookies",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.4.6"
+}
