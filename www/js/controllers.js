@@ -38,7 +38,7 @@ angular.module('app.controllers', [])
 
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
-            $http.post('http://10.90.149.29:8001/api-token-auth/', $scope.loginData).
+            $http.post(BASE_URL + 'api-token-auth/', $scope.loginData).
                 then(function (response) {
 
                     permanentStorage.setItem("auth_token", response.data.token);

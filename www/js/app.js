@@ -1,5 +1,5 @@
 // Ionic Starter App
-
+var BASE_URL = "http://dmarkey.com:8080/";
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -22,7 +22,7 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
         });
     })
     .factory('SocketService', function ($resource) {
-        return $resource('http://10.90.149.29:8001/api/sockets/:id/', {id: '@id'},
+        return $resource(BASE_URL + '10.90.149.29:8001/api/sockets/:id/', {id: '@id'},
             {
                 'update': {method: 'PUT'}
             });
@@ -30,13 +30,13 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
 
     })
     .factory('UnclaimedControllerService', function ($resource) {
-        return $resource('http://10.90.149.29:8001/api/unclaimed_controllers/:id/', {id: '@id'},
+        return $resource(BASE_URL + 'api/unclaimed_controllers/:id/', {id: '@id'},
             {
-                'claim': {method: 'POST', url:"http://10.90.149.29:8001/api/unclaimed_controllers/:id/claim/"}
+                'claim': {method: 'POST', url:BASE_URL + "api/unclaimed_controllers/:id/claim/"}
             });
     })
     .factory('myControllerService', function ($resource) {
-        return $resource('http://10.90.149.29:8001/api/my_controllers/:id/', {id: '@id'})
+        return $resource(BASE_URL + 'api/my_controllers/:id/', {id: '@id'})
     })
     .run(['$http', '$cookies', function ($http, $cookies) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
