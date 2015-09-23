@@ -22,12 +22,21 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
         });
     })
     .factory('SocketService', function ($resource) {
-        return $resource('http://dmarkey.com:8080/api/sockets/:id/', {id: '@id'},
+        return $resource('http://10.90.149.29:8001/api/sockets/:id/', {id: '@id'},
             {
                 'update': {method: 'PUT'}
             });
 
 
+    })
+    .factory('UnclaimedControllerService', function ($resource) {
+        return $resource('http://10.90.149.29:8001/api/unclaimed_controllers/:id/', {id: '@id'},
+            {
+                'claim': {method: 'POST', url:"http://10.90.149.29:8001/api/unclaimed_controllers/:id/claim/"}
+            });
+    })
+    .factory('myControllerService', function ($resource) {
+        return $resource('http://10.90.149.29:8001/api/my_controllers/:id/', {id: '@id'})
     })
     .run(['$http', '$cookies', function ($http, $cookies) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
@@ -37,36 +46,34 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
         $stateProvider
 
 
-            .state('page2', {
+            .state('login', {
                 url: '/login',
                 templateUrl: 'page2.html',
                 controller: "loginController"
             })
 
-            .state('page4', {
-                url: '/newcontroller',
-                templateUrl: 'page4.html'
-            })
-
-            .state('modal3', {
-                url: '/modal',
-                templateUrl: 'modal3.html'
-            })
-
             .state('mycontrollers', {
-                url: '/mycontrollers',
+                url: '/controllers',
+                controller: "myControllersCtrl",
                 templateUrl: 'page6.html'
             })
-
-            .state('page7', {
-                url: '/controller_detail/:1',
-                templateUrl: 'page7.html'
+            .state("mycontrollers_detail", {
+                url: '/controllers/:controllerId',
+                //controller: "controllerDetailCtrl",
+                templateUrl: 'controllerDetail.html'
+            })
+            .state('newcontroller', {
+                url: '/newcontroller',
+                templateUrl: 'page4.html',
+                controller: "unclaimedControllersCtrl"
             })
         ;
 
         // if none of the above states are matched, use this as the fallback
 
         $urlRouterProvider.otherwise('/login');
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         // if none of the above states are matched, use this as the fallback
 

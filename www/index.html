@@ -15,7 +15,7 @@
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ionic/js/angular/angular-resource.js"></script>
-     <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
 
 
     <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
@@ -52,10 +52,11 @@
                         <input type="password" ng-model="loginData.password" placeholder="">
                     </label>
 
-                </ion-list>
-                <div class="spacer" style="height: 40px;"></div>
-                <button class="button button-stable button-block ">Log in</button>
-                <a href="#/signup" class="button button-positive button-clear button-block ">Or create an account</a>
+                    </ion-list>
+                    <div class="spacer" style="height: 40px;"></div>
+                    <button class="button button-stable button-block ">Log in</button>
+                    <a href="#/signup" class="button button-positive button-clear button-block ">Or create an
+                        account</a>
                 </fieldset>
             </form>
         </ion-content>
@@ -63,15 +64,17 @@
 <script id="page4.html" name="page4" type="text/ng-template">
     <ion-view title="New Controller">
         <ion-content padding="true" class="has-header">
-            <h3>Detected Controllers</h3>
+
             <ion-list>
-                <ion-item>Controller 1</ion-item>
-                <ion-item>Controller 2</ion-item>
-                <ion-item>Controller 3</ion-item>
+                <ion-item class="item item-button-right" ng-repeat="controller in controllers">
+                    {{controller.model}}
+                    <a class="button button-calm" ng-click="controller_setup(controller)">Setup</a>
+                </ion-item>
+                <ion-item ng-show="!controllers.length">No controllers detected!</ion-item>
             </ion-list>
         </ion-content>
     </ion-view></script>
-<script id="modal3.html" type="text/ng-template">
+<script id="modal.html" type="text/ng-template">
     <div class="modal">
         <ion-header-bar class="bar-stable">
             <h1 class="title">Register Controller</h1>
@@ -84,23 +87,31 @@
             <ion-list>
                 <label class="item item-input">
                     <span class="input-label">Controller Name</span>
-                    <input type="text" placeholder="">
+                    <input type="text" ng-model="selected_controller.human_name" placeholder="">
                 </label>
             </ion-list>
-            <a href="#/newcontroller" class="button button-stable button-block ">Register</a>
+            <a href="#/newcontroller" class="button button-stable button-block" ng-click="confirm()">Register</a>
         </ion-content>
     </div></script>
+
 <script id="page6.html" type="text/ng-template">
     <ion-view title="My Controllers">
-        <ion-content padding="true" class="has-header">
+
+        <ion-header-bar align="right" class="bar bar-subheader">
+            <div class="buttons">
+                <a ui-sref="newcontroller" class="button">Add new.</a>
+            </div>
+        </ion-header-bar>
+        <ion-content class="has-header">
             <ion-list>
-                <ion-item>Sitting Room</ion-item>
-                <ion-item>Kitchen</ion-item>
-                <ion-item>Item 3</ion-item>
+                <ion-item class="item-button-right" ng-repeat="controller in controllers"></i>{{controller.human_name}}<a
+                        ui-sref="mycontrollers_detail({controllerId: controller.id})"
+                        class="button ion-chevron-right icon-accessory"></a></ion-item>
+                <ion-item ng-show="!controllers.length">No controllers registered!</ion-item>
             </ion-list>
         </ion-content>
     </ion-view></script>
-<script id="page7.html" type="text/ng-template">
+<script id="controllerDetail.html" type="text/ng-template">
     <ion-view title="Controller">
         <ion-content padding="true" class="has-header">
             <h1>Sockets</h1>

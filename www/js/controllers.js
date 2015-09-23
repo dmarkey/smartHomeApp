@@ -4,15 +4,22 @@
 angular.module('app.controllers', [])
 
 
-    .controller('loginController', function ($scope, $ionicModal, $timeout, $http, $ionicPopup, $state, $ionicHistory) {
+    .controller('loginController', function ($scope, $ionicModal, $timeout, $http, $ionicPopup,
+                                             $state, $ionicHistory, UnclaimedControllerService) {
 
         var permanentStorage = window.localStorage;
         var token = permanentStorage.getItem("auth_token");
-        if(token != null){
+        if (token != null) {
             $ionicHistory.nextViewOptions({
                 historyRoot: true
             });
-            $state.go("mycontrollers", {}, {location:'replace'});
+            $http.defaults.headers.common['Authorization'] = "Token " + token;
+
+            UnclaimedControllerService.query(null, function () {
+                $state.go("mycontrollers", {}, {location: 'replace'});
+            });
+
+
         }
 
 
@@ -25,15 +32,19 @@ angular.module('app.controllers', [])
 
         $scope.loginData = {};
         $scope.doLogin = function () {
+            $http.defaults.headers.common['Authorization'] = null;
             $scope.isProcessing = true;
             console.log('Doing login', $scope.loginData);
 
             // Simulate a login delay. Remove this and replace with your login
             // code if using a login system
-            $http.post('http://dmarkey.com:8080/api-token-auth/', $scope.loginData).
+            $http.post('http://10.90.149.29:8001/api-token-auth/', $scope.loginData).
                 then(function (response) {
 
                     permanentStorage.setItem("auth_token", response.data.token);
+                    $http.defaults.headers.common['Authorization'] = "Token " + response.data.token;
+                    $state.go("mycontrollers", {}, {location: 'replace'});
+
 
                     // this callback will be called asynchronously
                     // when the response is available
@@ -53,6 +64,40 @@ angular.module('app.controllers', [])
         };
     })
 
+    .controller("unclaimedControllersCtrl", function ($scope, $http, $cookies, $state, UnclaimedControllerService, $ionicModal, $ionicHistory) {
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+        $scope.controllers = UnclaimedControllerService.query();
+
+
+        $ionicModal.fromTemplateUrl('modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.controller_setup = function (controller) {
+            $scope.selected_controller = controller;
+            $scope.modal.show();
+        };
+
+
+        $scope.confirm = function () {
+            $scope.selected_controller.$claim().then(function () {
+                $scope.modal.hide().then(
+                    $ionicHistory.nextViewOptions({
+                        historyRoot: true
+                    }));
+                $state.go("mycontrollers", {}, {location: 'replace', reload: true});
+            })
+
+
+        }
+
+
+    })
+
+
     .controller('SocketsCtrl', function ($scope, $http, $cookies, SocketService) {
         $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
         $scope.sockets = SocketService.query();
@@ -64,5 +109,8 @@ angular.module('app.controllers', [])
         }
     })
 
-    .controller('SocketCtrl', function ($scope, $stateParams) {
+    .controller('myControllersCtrl', function ($scope, myControllerService) {
+        $scope.controllers = myControllerService.query();
+
+
     });
