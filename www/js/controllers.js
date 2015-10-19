@@ -16,7 +16,7 @@ angular.module('app.controllers', [])
             $http.defaults.headers.common['Authorization'] = "Token " + token;
 
             UnclaimedControllerService.query(null, function () {
-                $state.go("mycontrollers", {}, {location: 'replace'});
+                $state.go("home", {}, {location: 'replace'});
             });
 
 
@@ -43,7 +43,7 @@ angular.module('app.controllers', [])
 
                     permanentStorage.setItem("auth_token", response.data.token);
                     $http.defaults.headers.common['Authorization'] = "Token " + response.data.token;
-                    $state.go("mycontrollers", {}, {location: 'replace'});
+                    $state.go("home", {}, {location: 'replace'});
 
 
                     // this callback will be called asynchronously
@@ -111,6 +111,13 @@ angular.module('app.controllers', [])
 
     .controller('myControllersCtrl', function ($scope, myControllerService) {
         $scope.controllers = myControllerService.query();
+
+
+    })
+
+    .controller('controllerDetailCtrl', function ($scope, myControllerService, $stateParams) {
+        var controller = myControllerService.get({"id":$stateParams.controllerId});
+        $scope.controller = controller;
 
 
     });

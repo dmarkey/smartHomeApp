@@ -70,7 +70,7 @@
                     {{controller.model}}
                     <a class="button button-calm" ng-click="controller_setup(controller)">Setup</a>
                 </ion-item>
-                <ion-item ng-show="!controllers.length">No controllers detected!</ion-item>
+                <ion-item ng-show="!controllers.length">No new controllers detected!</ion-item>
             </ion-list>
         </ion-content>
     </ion-view></script>
@@ -94,6 +94,37 @@
         </ion-content>
     </div></script>
 
+
+<script id="home.html" type="text/ng-template">
+    <ion-view title="Home">
+
+        <div class="list card has-header">
+
+            <a ui-sref="mycontrollers" class="item item-icon-left">
+                <i class="icon ion-home"></i>
+                Controller Management
+            </a>
+
+            <a ui-sref="sockets" class="item item-icon-left">
+                <i class="icon ion-ios-pulse"></i>
+                Socket Control
+            </a>
+
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-ios-timer"></i>
+                Home Autopilot
+            </a>
+
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-log-out"></i>
+                Log out
+            </a>
+
+        </div>
+
+
+    </ion-view>
+</script>
 <script id="page6.html" type="text/ng-template">
     <ion-view title="My Controllers">
 
@@ -104,22 +135,25 @@
         </ion-header-bar>
         <ion-content class="has-header">
             <ion-list>
-                <ion-item class="item-button-right" ng-repeat="controller in controllers"></i>{{controller.human_name}}<a
-                        ui-sref="mycontrollers_detail({controllerId: controller.id})"
-                        class="button ion-chevron-right icon-accessory"></a></ion-item>
+
+                <ion-item class="item-button-right" ng-repeat="controller in controllers"></i>
+                    {{controller.human_name}}<a
+                            ui-sref="mycontrollers_detail({controllerId: controller.id})"
+                            class="button ion-chevron-right icon-accessory"></a></ion-item>
                 <ion-item ng-show="!controllers.length">No controllers registered!</ion-item>
             </ion-list>
         </ion-content>
     </ion-view></script>
 <script id="controllerDetail.html" type="text/ng-template">
     <ion-view title="Controller">
-        <ion-content padding="true" class="has-header">
-            <h1>Sockets</h1>
-            <ion-list>
-                <ion-toggle toggle-class="toggle-positive">Socket 1</ion-toggle>
-                <ion-toggle toggle-class="toggle-positive">Socket 2</ion-toggle>
-            </ion-list>
-        </ion-content>
+                <div class="list card has-header">
+
+            <span class="item item-icon-left">
+                <i class="icon ion-ios-pulse"></i> Number of sockets : {{controller.sockets.length}}
+
+            </span>
+                    </div>
+
     </ion-view> </script>
 </body>
 </html>
