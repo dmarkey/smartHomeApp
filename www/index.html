@@ -5,12 +5,6 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <style>
-        .angular-google-map-container {
-            width: 100%;
-            height: 504px;
-        }
-    </style>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -127,7 +121,6 @@
 </script>
 <script id="page6.html" type="text/ng-template">
     <ion-view title="My Controllers">
-
         <ion-header-bar align="right" class="bar bar-subheader">
             <div class="buttons">
                 <a ui-sref="newcontroller" class="button">Add new.</a>
@@ -136,7 +129,7 @@
         <ion-content class="has-header">
             <ion-list>
 
-                <ion-item class="item-button-right" ng-repeat="controller in controllers"></i>
+                <ion-item class="item-button-right" ng-repeat="controller in controllers">
                     {{controller.human_name}}<a
                             ui-sref="mycontrollers_detail({controllerId: controller.id})"
                             class="button ion-chevron-right icon-accessory"></a></ion-item>
@@ -144,6 +137,22 @@
             </ion-list>
         </ion-content>
     </ion-view></script>
+<script id="sockets.html" type="text/ng-template">
+  <ion-view title="Sockets">
+
+    <ion-header-bar align="right" class="bar bar-subheader">
+
+    </ion-header-bar>
+    <ion-content class="has-header">
+      <ion-list>
+
+          <div ng-repeat="socket in sockets" on-hold="onSocketRename(socket)" >
+          <ion-toggle ng-change="onSocketChange(socket)"   ng-model="socket.state" toggle-class="toggle-calm">{{socket.human_name}}</ion-toggle>
+          </div>
+
+        <ion-item ng-show="!sockets.length">No sockets available.</ion-item>
+      </ion-list>
+    </ion-content></ion-view></script>
 <script id="controllerDetail.html" type="text/ng-template">
     <ion-view title="Controller">
                 <div class="list card has-header">

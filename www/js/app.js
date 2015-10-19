@@ -1,5 +1,5 @@
 // Ionic Starter App
-var BASE_URL = "http://localhost:8081/";
+var BASE_URL = "http://dmarkey.com:8080/";
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -22,7 +22,7 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
         });
     })
     .factory('SocketService', function ($resource) {
-        return $resource(BASE_URL + 'localhost:8001/api/sockets/:id/', {id: '@id'},
+        return $resource(BASE_URL + 'api/sockets/:id/', {id: '@id'},
             {
                 'update': {method: 'PUT'}
             });
@@ -59,6 +59,11 @@ angular.module('app', ['ionic', 'app.controllers', "ngResource", "ngCookies"])
                 url: '/controllers',
                 controller: "myControllersCtrl",
                 templateUrl: 'page6.html'
+            })
+            .state('sockets', {
+                url: '/sockets',
+                controller: "SocketsCtrl",
+                templateUrl: 'sockets.html'
             })
             .state("mycontrollers_detail", {
                 url: '/controllers/:controllerId',
