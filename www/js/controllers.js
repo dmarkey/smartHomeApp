@@ -48,7 +48,7 @@ angular.module('app.controllers', [])
 
           // this callback will be called asynchronously
           // when the response is available
-        }, function () {
+        }, function (response) {
 
           $ionicPopup.alert({
             title: 'Login failed!',

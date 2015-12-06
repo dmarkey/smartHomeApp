@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <allow-navigation href="*" />
+
     <title></title>
 
 
@@ -147,7 +149,7 @@
       <ion-list>
 
           <div ng-repeat="socket in sockets" on-hold="onSocketRename(socket)" >
-          <ion-toggle ng-change="onSocketChange(socket)"   ng-model="socket.state" toggle-class="toggle-calm">{{socket.human_name}}</ion-toggle>
+          <ion-toggle ng-change="onSocketChange(socket)"   ng-model="socket.state" toggle-class="toggle-calm">{{socket.number}}. {{socket.human_name}}</ion-toggle>
           </div>
 
         <ion-item ng-show="!sockets.length">No sockets available.</ion-item>
@@ -159,6 +161,10 @@
 
             <span class="item item-icon-left">
                 <i class="icon ion-ios-pulse"></i> Number of sockets : {{controller.sockets.length}}
+
+            </span>
+                    <span class="item item-icon-left">
+                        <i class="icon ion-flame"></i> Temperature : {{controller.extra_items.Temperature.temperature}}
 
             </span>
                     </div>
